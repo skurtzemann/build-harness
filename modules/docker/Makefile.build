@@ -1,5 +1,3 @@
-## Use DOCKER_IMAGE_NAME envvar to specify docker image with tags
-## User ARGS to pass arguments
 DOCKER_BUILD_PATH ?= .
 DOCKER_BUILD_FLAGS ?= --no-cache
 DOCKER_FILE ?= ./Dockerfile
@@ -7,6 +5,10 @@ DOCKER_FILE ?= ./Dockerfile
 ## Detect APP informations
 DOCKER_APP = $(shell basename `pwd` | cut -d "-" -f2-)
 DOCKER_APP_VERSION = $(shell cat VERSION)
+
+## Use DOCKER_ACCOUNT envvar to specify the hub account
+DOCKER_IMAGE_NAMESPACE = $(DOCKER_ACCOUNT)/$(DOCKER_APP)
+DOCKER_IMAGE_NAME = $(DOCKER_IMAGE_NAMESPACE):$(DOCKER_APP_VERSION)
 
 .PHONY: docker\:build
 ## Build docker image
