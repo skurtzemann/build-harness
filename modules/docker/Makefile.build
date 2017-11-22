@@ -4,6 +4,10 @@ DOCKER_BUILD_PATH ?= .
 DOCKER_BUILD_FLAGS ?= --no-cache
 DOCKER_FILE ?= ./Dockerfile
 
+## Detect APP informations
+DOCKER_APP = $(shell basename `pwd` | cut -d "-" -f2-)
+DOCKER_APP_VERSION = $(shell cat VERSION)
+
 .PHONY: docker\:build
 ## Build docker image
 docker\:build: $(DOCKER)
