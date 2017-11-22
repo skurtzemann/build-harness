@@ -10,6 +10,15 @@ DOCKER_APP_VERSION = $(shell cat VERSION)
 DOCKER_IMAGE_NAMESPACE = $(DOCKER_ACCOUNT)/$(DOCKER_APP)
 DOCKER_IMAGE_NAME = $(DOCKER_IMAGE_NAMESPACE):$(DOCKER_APP_VERSION)
 
+
+
+.PHONY: names
+## Show docker image names
+docker\:names:
+	$(call assert-set,DOCKER_ACCOUNT)
+	@echo $(DOCKER_IMAGE_NAME)
+
+
 .PHONY: docker\:build
 ## Build docker image
 docker\:build: $(DOCKER)
