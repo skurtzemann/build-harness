@@ -1,3 +1,6 @@
+## Default build parameters
+## - use 'DOCKER_BUILD_ARGS' to defined custom build variables.
+##   variables are separated by a space
 DOCKER_BUILD_PATH ?= .
 DOCKER_BUILD_FLAGS ?= --no-cache
 DOCKER_BUILD_FILE ?= ./Dockerfile
