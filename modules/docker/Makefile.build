@@ -1,14 +1,14 @@
 DOCKER_BUILD_PATH ?= .
 DOCKER_BUILD_FLAGS ?= --no-cache
-DOCKER_FILE ?= ./Dockerfile
+DOCKER_BUILD_FILE ?= ./Dockerfile
 
 ## Detect APP informations
 DOCKER_APP = $(shell basename `pwd` | cut -d "-" -f2-)
 DOCKER_APP_VERSION = $(shell cat VERSION)
 
-## Use DOCKER_ACCOUNT envvar to specify the hub account
-DOCKER_IMAGE_NAMESPACE = $(DOCKER_ACCOUNT)/$(DOCKER_APP)
-DOCKER_IMAGE_NAME = $(DOCKER_IMAGE_NAMESPACE):$(DOCKER_APP_VERSION)
+## Use 'DOCKER_ACCOUNT' envvar to specify the namespace
+DOCKER_IMAGE = $(DOCKER_ACCOUNT)/$(DOCKER_APP)
+DOCKER_IMAGE_NAME = $(DOCKER_IMAGE):$(DOCKER_APP_VERSION)
 
 
 
@@ -23,5 +23,5 @@ docker\:names:
 ## Build docker image
 docker\:build: $(DOCKER)
 	$(call assert-set,DOCKER_ACCOUNT)
-	echo "Building $(DOCKER_IMAGE_NAME) from $(DOCKER_FILE)..."; \
-	$(DOCKER) build -t $(DOCKER_IMAGE_NAME) -f $(DOCKER_FILE) $(DOCKER_BUILD_PATH)
+	echo "Building $(DOCKER_IMAGE_NAME) from $(DOCKER_BUILD_FILE)..."; \
+	$(DOCKER) build -t $(DOCKER_IMAGE_NAME) -f $(DOCKER_BUILD_FILE) $(DOCKER_BUILD_PATH)
