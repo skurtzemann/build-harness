@@ -32,3 +32,10 @@ docker\:build: $(DOCKER)
 	done`; \
 	echo "Building $(DOCKER_IMAGE_NAME) from $(DOCKER_BUILD_FILE) with [$$BUILD_ARGS] build args..."; \
 	$(DOCKER) build -t $(DOCKER_IMAGE_NAME) $$BUILD_ARGS -f $(DOCKER_BUILD_FILE) $(DOCKER_BUILD_PATH)
+
+
+.PHONY: docker\:enter
+## Enter into the image with a bash shell
+docker\:enter: $(DOCKER)
+	$(call assert-set,DOCKER_ACCOUNT)
+	$(DOCKER) run -it --rm --entrypoint=bash $(DOCKER_IMAGE_NAME)
