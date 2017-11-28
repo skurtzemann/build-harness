@@ -20,7 +20,7 @@ DOCKER_IMAGE_NAME = $(DOCKER_IMAGE):$(DOCKER_APP_VERSION)
 
 
 
-.PHONY: names
+.PHONY: docker\:names
 ## Show docker image names
 docker\:names:
 	$(call assert-set,DOCKER_IMAGE)
