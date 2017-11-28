@@ -1,0 +1,8 @@
+.PHONY: gitlab\:docker-tag-and-push
+
+## Tag and push to a Docker Registry according GitLab CI environment variables
+gitlab\:docker-tag-and-push:
+	$(call assert-set,DOCKER)
+	$(call assert-set,DOCKER_REGISTRY_SERVER)
+	$(call assert-set,DOCKER_IMAGE)
+	@(BUILD_HARNESS_PATH)/bin/gitlab_docker_tag_and_push.sh
