@@ -11,9 +11,9 @@ if [ ! -z "${CI_COMMIT_TAG}" ]; then
 fi
 
 for TAG in "${DOCKER_TAGS[@]}"; do
-  echo "Tagging ${DOCKER_REGISTRY_SERVER}/${DOCKER_IMAGE_NAME}:${TAG}"
-  docker tag "${DOCKER_IMAGE_NAME}:ci-build" "${DOCKER_REGISTRY_SERVER}/${DOCKER_IMAGE_NAME}:${TAG}" && \
-    docker push "${DOCKER_REGISTRY_SERVER}/${DOCKER_IMAGE_NAME}:${TAG}";
+  echo "Tagging ${DOCKER_REGISTRY_SERVER}/${DOCKER_IMAGE}:${TAG}"
+  docker tag "${DOCKER_IMAGE}:ci-build" "${DOCKER_REGISTRY_SERVER}/${DOCKER_IMAGE}:${TAG}" && \
+    docker push "${DOCKER_REGISTRY_SERVER}/${DOCKER_IMAGE}:${TAG}";
   if [ $? -ne 0 ]; then
     echo "Failed" 1>&2
     exit 1
