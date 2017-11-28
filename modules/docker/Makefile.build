@@ -5,9 +5,14 @@ DOCKER_BUILD_PATH ?= .
 DOCKER_BUILD_FLAGS ?= --no-cache
 DOCKER_BUILD_FILE ?= ./Dockerfile
 
-## Detect APP informations
-DOCKER_APP = $(shell basename `pwd` | cut -d "-" -f2-)
-DOCKER_APP_VERSION = $(shell cat VERSION)
+## Detect APP version
+## - for Gitlab CI we use the tag "ci-build" to identified the build container
+## - for others build (local, etc.) we get the content of VERSION file
+ifeq ($(GITLAB_CI),true)
+	DOCKER_APP_VERSION = ci-build
+else
+	DOCKER_APP_VERSION = $(shell cat VERSION)
+endif
 
 ## Image name
 ## - use 'DOCKER_IMAGE' envvar to specify the namespace
