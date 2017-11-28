@@ -5,4 +5,4 @@ gitlab\:docker-tag-and-push:
 	$(call assert-set,DOCKER)
 	$(call assert-set,DOCKER_REGISTRY_SERVER)
 	$(call assert-set,DOCKER_IMAGE)
-	@(BUILD_HARNESS_PATH)/bin/gitlab_docker_tag_and_push.sh
+	@$(BUILD_HARNESS_PATH)/bin/gitlab_docker_tag_and_push.sh
