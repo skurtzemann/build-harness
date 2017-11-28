@@ -10,8 +10,7 @@ DOCKER_APP = $(shell basename `pwd` | cut -d "-" -f2-)
 DOCKER_APP_VERSION = $(shell cat VERSION)
 
 ## Image name
-## - use 'DOCKER_ACCOUNT' envvar to specify the namespace
-DOCKER_IMAGE = $(DOCKER_ACCOUNT)/$(DOCKER_APP)
+## - use 'DOCKER_IMAGE' envvar to specify the namespace
 DOCKER_IMAGE_NAME = $(DOCKER_IMAGE):$(DOCKER_APP_VERSION)
 
 
@@ -19,14 +18,14 @@ DOCKER_IMAGE_NAME = $(DOCKER_IMAGE):$(DOCKER_APP_VERSION)
 .PHONY: names
 ## Show docker image names
 docker\:names:
-	$(call assert-set,DOCKER_ACCOUNT)
+	$(call assert-set,DOCKER_IMAGE)
 	@echo $(DOCKER_IMAGE_NAME)
 
 
 .PHONY: docker\:build
 ## Build docker image
 docker\:build: $(DOCKER)
-	$(call assert-set,DOCKER_ACCOUNT)
+	$(call assert-set,DOCKER_IMAGE)
 	@BUILD_ARGS=`for arg in $$DOCKER_BUILD_ARGS; do \
 		printf -- '--build-arg %s ' "$$arg"; \
 	done`; \
@@ -37,5 +36,5 @@ docker\:build: $(DOCKER)
 .PHONY: docker\:enter
 ## Enter into the image with a bash shell
 docker\:enter: $(DOCKER)
-	$(call assert-set,DOCKER_ACCOUNT)
+	$(call assert-set,DOCKER_IMAGE)
 	$(DOCKER) run -it --rm --entrypoint=bash $(DOCKER_IMAGE_NAME)
