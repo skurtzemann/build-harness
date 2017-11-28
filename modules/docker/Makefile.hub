@@ -6,3 +6,14 @@ docker\:login: $(DOCKER)
 	$(call assert-set,DOCKER_HUB_USERNAME)
 	$(call assert-set,DOCKER_HUB_PASSWORD)
 	@$(DOCKER) login --username="$(DOCKER_HUB_USERNAME)" --password="$(DOCKER_HUB_PASSWORD)"
+
+
+.PHONY: docker\:registry\:login
+## Use DOCKER_REGISTRY_USERNAME, DOCKER_REGISTRY_PASSWORD and DOCKER_REGISTRY_SERVER env variables to pass credentials
+## Login in to a Docker Registry
+docker\:registry\:login: $(DOCKER)
+	$(call assert-set,DOCKER)
+	$(call assert-set,DOCKER_REGISTRY_USERNAME)
+	$(call assert-set,DOCKER_REGISTRY_PASSWORD)
+	$(call assert-set,DOCKER_REGISTRY_SERVER)	
+	@$(DOCKER) login --username="$(DOCKER_REGISTRY_USERNAME)" --password="$(DOCKER_REGISTRY_PASSWORD)" $(DOCKER_REGISTRY_SERVER)
