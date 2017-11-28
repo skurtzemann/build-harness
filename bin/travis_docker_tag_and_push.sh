@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -e
 
 DOCKER_TAGS=("$TRAVIS_COMMIT")
 
