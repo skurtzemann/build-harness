@@ -21,8 +21,8 @@ if [ ! -z "${CI_COMMIT_TAG}" ]; then
   echo "CI_COMMIT_TAG=${CI_COMMIT_TAG}"
   DOCKER_TAGS+=("${CI_COMMIT_TAG}")
 else
-  DOCKER_TAGS+=("$CI_COMMIT_REF_NAME")
-  DOCKER_TAGS+=("${CI_COMMIT_REF_NAME}-${CI_JOB_ID}")
+  DOCKER_TAGS+=("${CI_COMMIT_REF_NAME//\//-}")
+  DOCKER_TAGS+=("${CI_COMMIT_REF_NAME//\//-}-${CI_JOB_ID}")
 fi
 
 # For the master branch add the "latest" tag
