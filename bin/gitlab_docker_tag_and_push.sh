@@ -1,4 +1,8 @@
 #!/usr/bin/env bash
+# ---
+# Create docker tags to identified to built container according CI variables
+# then push to 'DOCKER_REGISTRY_SERVER'.
+# --- 
 
 echo "CI_JOB_ID=${CI_JOB_ID}"
 
@@ -23,7 +27,7 @@ if [ "${CI_COMMIT_REF_NAME}" == "master" ]; then
   DOCKER_TAGS+=("latest")
 fi
 
-# For each 'DOCKER_TAGS' item tag and push an docker image based on the tag "ci-build" 
+# For each 'DOCKER_TAGS' item, tag and push an docker image based on the tag "ci-build" 
 for TAG in "${DOCKER_TAGS[@]}"; do
   echo "Tagging ${DOCKER_REGISTRY_SERVER}/${DOCKER_IMAGE}:${TAG}"
   docker tag "${DOCKER_IMAGE}:ci-build" "${DOCKER_REGISTRY_SERVER}/${DOCKER_IMAGE}:${TAG}" && \
