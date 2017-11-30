@@ -6,15 +6,15 @@
 
 echo "CI_JOB_ID=${CI_JOB_ID}"
 
-# We create several docker tags to identified to build container
+# General docker tags 
 # - the full commit SHA
 # - the branch or tag
-# - the branch or tag with the 'short' commit SHA (8 characters)
 # - the branch or tag with the GitLab CI job id 
+# - the short commit (8 characters)
 DOCKER_TAGS=("$CI_COMMIT_SHA")
 DOCKER_TAGS+=("$CI_COMMIT_REF_NAME")
-DOCKER_TAGS+=("${CI_COMMIT_REF_NAME}-${CI_COMMIT_SHA:0:8}")
 DOCKER_TAGS+=("${CI_COMMIT_REF_NAME}-j${CI_JOB_ID}")
+DOCKER_TAGS=("${CI_COMMIT_SHA:0:8}")
 
 # For a git tag create an additionnal docker tag
 if [ ! -z "${CI_COMMIT_TAG}" ]; then
