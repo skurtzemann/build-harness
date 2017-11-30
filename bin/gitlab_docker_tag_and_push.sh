@@ -10,7 +10,7 @@ echo "CI_JOB_ID=${CI_JOB_ID}"
 # - the full commit SHA
 # - the short commit (8 characters)
 DOCKER_TAGS=("$CI_COMMIT_SHA")
-DOCKER_TAGS=("${CI_COMMIT_SHA:0:8}")
+DOCKER_TAGS+=("${CI_COMMIT_SHA:0:8}")
 
 # Branches tags
 # - for a git tag we create the related docker tag
